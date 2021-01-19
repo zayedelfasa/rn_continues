@@ -21,11 +21,12 @@ jobs:
             ${{ runner.is }}-node-
       
       - run: rm -rf node_modules && npm install
+        name: Remove node_modules
       - run: npm ci
       - run: npx jetifier
-      - run: ./gradlew assembleRelease
+      - run: ./gradlew clean && ./gradlew bundleRelease
         working-directory: android
-        name: Build Android apk (debug)
+        name: Build Android apk (Release)
 
       - uses: actions/upload-artifact@v2
         with:
